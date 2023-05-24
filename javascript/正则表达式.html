@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // exec
+        var execStr = 'a 1k45k b'
+        var execReg = /\d[a-z]/g
+        var match = execReg.exec(execStr)
+        console.log(match, execReg.lastIndex)
+        var match2 = execReg.exec(execStr)
+        console.log(match2, execReg.lastIndex)
+        var match3 = execReg.exec(execStr)
+        console.log(match3, execReg.lastIndex)
+        // test
+        var testStr = '123abc'
+        var testReg = /\d[a-z]/g
+        var isMatch = testReg.test(testStr)
+        console.log(isMatch)
+        var isMatch2 = testReg.test(testStr)
+        console.log(isMatch2)
+        // match
+        var matchStr = '123abc124abc'
+        var matchRegG = /(\d[a-z])/g
+        var matchReg = /(\d[a-z])/
+        var match = matchStr.match(matchReg)
+        var match2 = matchStr.match(matchRegG)
+        console.log(match, match2)
+
+        // matchAll
+        var matchStr = '123abc124abc'
+        var matchRegG = /(\d[a-z])/g
+        var match2 = matchStr.matchAll(matchRegG)
+        console.log(Array.from(match2))
+
+        // search
+        var matchStr = '123abc124abc'
+        var matchReg = /(\d[a-z])/
+        var s1 = matchStr.search(matchReg)
+        console.log(s1)
+
+        // replace
+        var replaceReg1 = /\d([a-z])/g
+        var replaceStr1 = '1a2b333'
+        var str1 = replaceStr1.replace(replaceReg1, '$1-$1')
+        var replaceReg2 = /(\d)(?=(\d{3})+(?=(\.|,)))/g
+        var replaceStr2 = '1213412313567.2333'
+        var str2 = replaceStr2.replace(replaceReg2, '$1,')
+        console.log(str1, str2)
+
+        // split
+        var splitReg = /\s/
+        var splitStr = 'ab c d f'
+        var arr = splitStr.split(splitReg)
+        console.log(arr)
+    </script>
+</body>
+</html>

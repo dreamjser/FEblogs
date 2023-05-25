@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    section{
+      height: 300px;
+    }
+    .box1{
+      margin: 30px;
+      background-color: azure;
+    }
+    .float{
+      width: 100px;
+      float: left;
+      height: 200px;
+      border: 1px solid #000;
+    }
+    p{
+      border: 4px red solid;
+    }
+    .box2,.box3{
+      height: 100px;
+    }
+    .box2{
+      background: red;
+    }
+    .box3{
+      background-color: #000;
+    }
+    .box3-inner{
+      margin-top: 20px;
+    }
+  </style>
+  <body>
+    <h1>清除浮动，撑起外部元素</h1>
+    <section>
+      <div class="box1">
+        <div class="float">左浮动</div>
+        <p>我是内容</p>
+      </div>
+    </section>
+    <section>
+      <div class="box1" style="display: flow-root;">
+        <div class="float">左浮动</div>
+        <p>我是内容</p>
+      </div>
+    </section>
+    
+    <h1>排除外部浮动，阻止元素被浮动元素覆盖</h1>
+    <section>
+      <div class="box1">
+        <div class="float">左浮动</div>
+        <p>我是内容</p>
+      </div>
+    </section>
+    <section>
+      <div class="box1" style="display: flow-root;">
+        <div class="float">左浮动</div>
+        <p style="display: flow-root;">我是内容</p>
+      </div>
+    </section>
+
+    <h1>避免外边距重叠</h1>
+    <section>
+      <div class="box2"></div>
+      <div class="box3">
+        <div class="box3-inner"></div>
+      </div>
+    </section>
+    <section>
+      <div class="box2"></div>
+      <div class="box3" style="display: flow-root;">
+        <div class="box3-inner"></div>
+      </div>
+    </section>
+  </body>
+</html>

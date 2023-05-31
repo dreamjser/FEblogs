@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="input">
+    <script>
+        // 防抖
+        function debounce(func, delay) {
+            let timer = null;
+            return function(...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                func.apply(this, args);
+                }, delay);
+            };
+        }
+        // 节流
+        function throttle(func, delay) {
+            let timer = null;
+            return function(...args) {
+                if (!timer) {
+                timer = setTimeout(() => {
+                    func.apply(this, args);
+                    timer = null;
+                }, delay);
+                }
+            };
+        }
+
+        document.getElementById('input').addEventListener('input', debounce(() => {
+            console.log(222)
+        }, 1000), false)
+
+        window.addEventListener('resize', throttle(() => {
+            console.log(111)
+        }, 1000), false)
+
+
+    </script>
+</body>
+</html>

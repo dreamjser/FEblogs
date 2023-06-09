@@ -17,7 +17,7 @@
 前两个值和只有两个值时的用法相同。
 第三个值必须是\<length\>。它始终代表 Z 轴偏移量。
 
-<img src="../images/3d_axes.png">
+<img src="../assets/3d_axes.png">
 
 ## perspective
 

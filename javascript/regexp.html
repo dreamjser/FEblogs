@@ -48,7 +48,7 @@
         var replaceReg1 = /\d([a-z])/g
         var replaceStr1 = '1a2b333'
         var str1 = replaceStr1.replace(replaceReg1, '$1-$1')
-        var replaceReg2 = /(\d)(?=(\d{3})+(?=(\.|,)))/g
+        var replaceReg2 = /(\d)(?=(\d{3})+\.)/g
         var replaceStr2 = '1213412313567.2333'
         var str2 = replaceStr2.replace(replaceReg2, '$1,')
         console.log(str1, str2)

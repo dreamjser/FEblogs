@@ -11,3 +11,4 @@
 + [事件循环event loop](./javascript/eventloop.md)
 + [防抖、节流](./javascript/throttledebounce.md)
 + [web worker](./javascript/webworker.md)
++ [Promise](./javascript/promise.md)

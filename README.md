@@ -14,3 +14,4 @@
 
 ## ES6
 + [Promise](./javascript/promise.md)
++ [Set和Map](./javascript/setmap.md)

@@ -13,5 +13,5 @@
 + [web worker](./javascript/webworker.md)
 
 ## ES6
-+ [Promise](./javascript/promise.md)
-+ [Set和Map](./javascript/setmap.md)
++ [Promise](./es6+/promise.md)
++ [Set和Map](./es6+/setmap.md)

@@ -1,4 +1,4 @@
-# docker部署web应用
+# 一、docker本地创建容器、镜像
 
 ## 1、下载centos7镜像
 
@@ -111,5 +111,56 @@ server {
 ## 访问web页面
 
 浏览器输入 http://localhost:8022、http://localhost:8023、http://localhost:8024
+
+成功访问表示配置成功
+
+## 转换容器为镜像
+
+-a，提交的镜像作者；
+-m，提交时的说明文字
+868b3beb9a3d，容器id
+dreamjser/centos-nginx-web:1，镜像仓库:标签
+
+`docker commit -a 'dreamjser@gmail.com' -m 'first commit' 868b3beb9a3d dreamjser/centos-nginx-web:1`
+
+## 镜像推送
+
+`docker push dreamjser/centos-nginx-web:1`
+
+# 二、web服务器下载镜像、创建容器
+
+## 安装docker
+
+```
+curl -fsSL https://get.docker.com/ | sh
+
+// 启动docker服务
+systemctl start docker
+// 开机自动启动
+systemctl enable docker
+ 
+```
+
+## 下载镜像
+
+```
+docker pull dreamjser/centos-nginx-web:1
+```
+
+## 创建并启动容器
+
+```
+docker run -itd --privileged --name centos7 -e "container=docker" -p 8022:8022 -p 8023:8023 -p 8024:8024  dreamjser/centos-nginx-web:1  /usr/sbin/init
+```
+
+## 进入容器
+
+```
+docker exec -it centos7 /bin/bash
+```
+
+## 访问web页面
+
+浏览器输入 http://192.168.194.50:8022、http://192.168.194.50:8023、http://192.168.194.50:8024
 
 成功访问表示配置成功

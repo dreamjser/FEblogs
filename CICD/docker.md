@@ -13,7 +13,7 @@
 --name，容器名字
 -p, --publish=[]， 指定容器暴露的端口
 
-`docker run -itd --privileged --name centos7 -e "container=docker" -p 8022:8022 -p 8023:8023 -p 8024:8024  centos:7  /usr/sbin/init`
+`docker run -itd --privileged --name centos7 -e "container=docker" --restart "always" -p 8022:8022 -p 8023:8023 -p 8024:8024  centos:7  /usr/sbin/init`
 
 ## 3、进入容器
 

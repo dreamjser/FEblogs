@@ -15,6 +15,10 @@
 
 `docker run -itd --privileged --name centos7 -e "container=docker" --restart "always" -p 8022:8022 -p 8023:8023 -p 8024:8024  centos:7  /usr/sbin/init`
 
+查看容器ip
+
+`docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' centos7`
+
 ## 3、进入容器
 
 `docker exec -it centos7 /bin/bash`

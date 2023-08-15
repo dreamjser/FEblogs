@@ -37,7 +37,7 @@ yum install nginx
 yum install wget
 
 // 下载替换systemctl
-wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py -O /usr/bin/systemctl
+wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py -O /usr/bin/systemctl --no-check-certificate
 
 // 设置权限
 chmod a+x /usr/bin/systemctl

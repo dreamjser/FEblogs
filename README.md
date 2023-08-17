@@ -16,6 +16,8 @@
 + [Promise](./es6+/promise.md)
 + [Set和Map](./es6+/setmap.md)
 + [Proxy](./es6+/proxy.md)
++ [Iterator迭代器](./es6+/iterator.md)
++ [Generator生成器](./es6+/generator.md)
 
 ## CI/CD
 

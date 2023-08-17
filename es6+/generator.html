@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function* createGenerator() {
+      console.log('111')
+      console.log('1111')
+      yield '1';
+      yield '3';
+      return 'done';
+    }
+
+    var hw = createGenerator();
+
+    console.log(hw.next())
+    console.log(hw.next())
+    console.log(hw.next())
+  </script>
+</body>
+</html>

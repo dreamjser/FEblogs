@@ -11,6 +11,7 @@
 + [事件循环event loop](./javascript/eventloop.md)
 + [防抖、节流](./javascript/throttledebounce.md)
 + [web worker](./javascript/webworker.md)
++ [数组Array](./javascript/array.md)
 
 ## ES6
 + [Promise](./es6+/promise.md)
@@ -22,6 +23,7 @@
 ## CI/CD
 
 + [docker](./CICD/docker.md)
++ [jenkins](./CICD/jenkins.md)
 
 ## kubernetes
 

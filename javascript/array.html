@@ -96,6 +96,39 @@
 
   // ["it's","Sunny","in", "", "California"]
   console.log(arr14.flatMap((x) => x.split(" ")));
+
+  console.log([1, 2, 3].includes(1, 3))
+
+  const arr16 = ['a', 'b', 'c'];
+
+  for (const key of arr16.keys()) {
+    console.log(key);
+  }
+
+  const arr17 = [{
+    id: '1001',
+    name: 'syg'
+  },{
+    id: '1002',
+    name: 'zs'
+  },{
+    id: '1003',
+    name: 'z22'
+  }]
+
+  const obj = arr17.reduce((o, item, index) => {
+    o[item.id] = item
+    return o
+  }, {})
+  console.log(obj)
+
+  const arr18 = [2, 3, 11, 5]
+
+  arr18.sort((a, b) => {
+    return b - a
+  })
+
+  console.log(arr18)
   </script>
 </body>
 </html>

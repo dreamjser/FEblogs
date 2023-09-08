@@ -1,0 +1,241 @@
+# 字符串String
+
+## String.prototype.at()
+
+`at()` 方法接受一个整数值，并返回一个新的 String，该字符串由位于指定偏移量处的单个 UTF-16 码元组成。该方法允许正整数和负整数。负整数从字符串中的最后一个字符开始倒数。
+
+```
+const sentence = 'The quick brown fox jumps over the lazy dog.';
+
+let index = 5;
+
+console.log(`Using an index of ${index} the character returned is ${sentence.at(index)}`);
+// Expected output: "Using an index of 5 the character returned is u"
+
+index = -4;
+
+console.log(`Using an index of ${index} the character returned is ${sentence.at(index)}`);
+// Expected output: "Using an index of -4 the character returned is d"
+```
+
+## String.prototype.charAt()
+
+String 的 `charAt()` 方法返回一个由给定索引处的单个 UTF-16 码元构成的新字符串。
+
+```
+const sentence = 'The quick brown fox jumps over the lazy dog.';
+
+const index = 4;
+
+console.log(`The character at index ${index} is ${sentence.charAt(index)}`);
+// Expected output: "The character at index 4 is q"
+```
+
+## String.prototype.charCodeAt()
+
+String 的 `charCodeAt()` 方法返回一个整数，表示给定索引处的 UTF-16 码元，其值介于 0 和 65535 之间。
+
+```
+const sentence = 'The quick brown fox jumps over the lazy dog.';
+
+const index = 4;
+
+console.log(`The character code ${sentence.charCodeAt(index)} is equal to ${sentence.charAt(index)}`);
+// Expected output: "The character code 113 is equal to q"
+```
+
+## String.prototype.codePointAt()
+
+String 的 `codePointAt()` 方法返回一个非负整数，该整数是从给定索引开始的字符的 Unicode 码位值。请注意，索引仍然基于 UTF-16 码元，而不是 Unicode 码位。
+
+
+## String.prototype.concat()
+
+`concat()` 方法将字符串参数连接到调用的字符串，并返回一个新的字符串。
+
+```
+const str1 = 'Hello';
+const str2 = 'World';
+
+console.log(str1.concat(' ', str2));
+// Expected output: "Hello World"
+
+console.log(str2.concat(', ', str1));
+// Expected output: "World, Hello"
+```
+
+## String.prototype.endsWith()
+
+`endsWith()` 方法用于判断一个字符串是否以指定字符串结尾，如果是则返回 true，否则返回 false。
+
+endsWith(searchString, endPosition)
+
+- searchString
+要搜索的作为结尾的字符串，不能是正则表达式。所有非正则表达式的值都会被强制转换为字符串，因此如果该参数被省略或传入 undefined，endsWith() 方法会在字符串中搜索 "undefined"，这通常不是你想要的。
+
+- endPosition 可选
+预期找到 searchString 的末尾位置（即 searchString 最后一个字符的索引加 1）。默认为 str.length。
+
+- 返回值
+如果被检索字符串的末尾出现了指定的字符串（包括 searchString 为空字符串的情况），则返回 true；否则返回 false。
+
+## String.prototype.includes()
+
+`includes()` 方法执行区分大小写的搜索，以确定是否可以在一个字符串中找到另一个字符串，并根据情况返回 true 或 false。
+
+includes(searchString, position)
+
+- searchString
+要在 str 中搜索的字符串。不能是正则表达式。
+
+- position 可选
+在字符串中开始搜索 searchString 的位置。（默认为 0。）
+
+```
+"Blue Whale".includes("blue"); // 返回 false
+```
+
+## String.prototype.indexOf()
+
+String 的 `indexOf()` 方法在字符串中搜索指定子字符串，并返回其第一次出现的位置索引。它可以接受一个可选的参数指定搜索的起始位置，如果找到了指定的子字符串，则返回的位置索引大于或等于指定的数字。
+
+indexOf(searchString, position)
+
+- searchValue
+要搜索的子字符串。所有传入值都会被强制转换为字符串，因此如果该参数被省略或传入 undefined，indexOf() 方法会在字符串中搜索 "undefined"，这通常不是你想要的。
+
+- position 可选
+该方法返回指定子字符串在大于或等于 position 位置的第一次出现的索引，默认为 0。如果 position 大于调用字符串的长度，则该方法根本不搜索调用字符串。如果 position 小于零，该方法的行为就像 position 为 0 时一样。
+
+  - hello world hello'.indexOf('o', -5) 返回 4——因为它使该方法的行为类似于第二个参数为 0，并且 o 在大于或等于 0 位置的第一次出现是在 4 位置。
+  - 'hello world hello'.indexOf('world', 12) 返回 -1——因为，虽然子字符串 world 确实出现在索引 6 处，但该位置不大于或等于 12。
+  - 'hello world hello'.indexOf('o', 99) 返回 -1——因为 99 大于 hello world hello 的长度，这会导致方法根本不搜索字符串。
+- 返回值
+查找的字符串 searchValue 的第一次出现的索引，如果没有找到，则返回 -1。
+
+```
+"Blue Whale".indexOf("Blue"); // 返回  0
+"Blue Whale".indexOf("Blute"); // 返回 -1
+"Blue Whale".indexOf("Whale", 0); // 返回  5
+"Blue Whale".indexOf("Whale", 5); // 返回  5
+"Blue Whale".indexOf("Whale", 7); // 返回 -1
+```
+
+## String.prototype.match()
+
+`match()` 方法检索字符串与正则表达式进行匹配的结果。
+
+match(regexp)
+
+- regexp
+  一个正则表达式对象或者任何具有 Symbol.match 方法的对象。
+
+  如果 regexp 不是 RegExp 对象并且对象上无 Symbol.match 方法，则会使用 new RegExp(regexp) 将其隐式地转换为 RegExp。
+
+  如果你没有给出任何参数并直接使用 match() 方法，你将会得到一个包含空字符串的数组：[""]，因为这等价于 match(/(?:)/)。
+
+- 返回值
+  一个 Array，其内容取决于是否存在全局（g）标志，如果没有匹配，则返回 null。
+
+  如果使用 g 标志，则将返回与完整正则表达式匹配的所有结果，但不会返回捕获组。
+  如果没有使用 g 标志，则只返回第一个完整匹配及其相关捕获组。在这种情况下，match() 方法将返回与 RegExp.prototype.exec() 相同的结果（一个带有一些额外属性的数组）。
+
+```
+const str = "For more information, see Chapter 3.4.5.1";
+const re = /see (chapter \d+(\.\d)*)/i;
+const found = str.match(re);
+
+console.log(found);
+// [
+//   'see Chapter 3.4.5.1',
+//   'Chapter 3.4.5.1',
+//   '.1',
+//   index: 22,
+//   input: 'For more information, see Chapter 3.4.5.1',
+//   groups: undefined
+// ]
+```
+
+## String.prototype.matchAll()
+
+`matchAll()` 方法返回一个迭代器，该迭代器包含了检索字符串与正则表达式进行匹配的所有结果（包括捕获组）。
+
+matchAll(regexp)
+
+- regexp
+  一个正则表达式对象，或者是任何具有 Symbol.matchAll 方法的对象。
+
+  如果 regexp 不是一个 RegExp 对象，并且没有 Symbol.matchAll 方法，它将通过 new RegExp(regexp, 'g') 被隐式转换为一个 RegExp 对象。
+
+  如果 regexp 是一个正则表达式，那么它必须设置了全局（g）标志，否则会抛出 TypeError 异常。
+
+- 返回值
+一个匹配结果的可迭代迭代器对象 (en-US)（它不可重新开始）。每个匹配结果都是一个数组，其形状与 RegExp.prototype.exec() 的返回值相同。
+
+```
+const regexp = /foo[a-z]*/g;
+const str = "table football, foosball";
+const matches = str.matchAll(regexp);
+
+for (const match of matches) {
+  console.log(
+    `找到 ${match[0]} 起始位置=${match.index} 结束位置=${
+      match.index + match[0].length
+    }.`,
+  );
+}
+// 找到 football 起始位置=6 结束位置=14.
+// 找到 foosball 起始位置=16 结束位置=24.
+
+// 匹配迭代器在 for...of 迭代后用尽
+// 再次调用 matchAll 以创建新的迭代器
+Array.from(str.matchAll(regexp), (m) => m[0]);
+// [ "football", "foosball" ]
+```
+
+## String.prototype.padEnd()
+
+`padEnd()` 方法会将当前字符串从末尾开始填充给定的字符串（如果需要会重复填充），直到达到给定的长度。填充是从当前字符串的末尾开始的。
+
+
+padEnd(targetLength, padString)
+
+- targetLength
+当前 str 填充后的长度。如果该值小于或等于 str.length，则会直接返回当前 str。
+
+- padString 可选
+用于填充当前 str 的字符串。如果 padString 太长，无法适应 targetLength，则会被截断：对于从左到右的语言，左侧的部分将会被保留；对于从右到左的语言，右侧的部分将会被保留。默认值为“ ” (U+0020)。
+
+- 返回值
+在当前 str 末尾填充 padString 直到达到给定的 targetLength 所形成的 String。
+
+```
+"abc".padEnd(10); // "abc       "
+"abc".padEnd(10, "foo"); // "abcfoofoof"
+"abc".padEnd(6, "123456"); // "abc123"
+"abc".padEnd(1); // "abc"
+```
+
+## String.prototype.padStart()
+
+`padStart()` 方法用另一个字符串填充当前字符串（如果需要会重复填充），直到达到给定的长度。填充是从当前字符串的开头开始的。
+
+padStart(targetLength, padString)
+
+- targetLength
+当前 str 填充后的长度。如果该值小于或等于 str.length，则会直接返回当前 str。
+
+- padString 可选
+用于填充当前 str 的字符串。如果 padString 太长，无法适应 targetLength，则会从末尾被截断。默认值为 Unicode“空格”字符（U+0020）。
+
+```
+"abc".padStart(10); // "       abc"
+"abc".padStart(10, "foo"); // "foofoofabc"
+"abc".padStart(6, "123465"); // "123abc"
+"abc".padStart(8, "0"); // "00000abc"
+"abc".padStart(1); // "abc"
+```
+
+## String.raw()
+
+`String.raw()` 静态方法是模板字符串的标签函数。它的作用类似于 Python 中的 r 前缀或 C# 中用于字符串字面量的 @ 前缀。它用于获取模板字符串的原始字符串形式——即，替换表达式（例如 ${foo}）会被替换处理，但转义序列（例如 \n）不会被处理。

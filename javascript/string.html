@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var reg = /[a-z]/g
+    var str = '123b9c'
+    var m1 = str.match(reg)
+    console.log(m1)
+    var m2 = str.matchAll(reg)
+
+    for(let p of m2) {
+      console.log(p)
+    }
+
+    var date = new Date().getDate()
+
+    console.log(`${date}`.padStart(2, '0'))
+  </script>
+</body>
+</html>

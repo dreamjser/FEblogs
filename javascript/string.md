@@ -239,3 +239,38 @@ padStart(targetLength, padString)
 ## String.raw()
 
 `String.raw()` 静态方法是模板字符串的标签函数。它的作用类似于 Python 中的 r 前缀或 C# 中用于字符串字面量的 @ 前缀。它用于获取模板字符串的原始字符串形式——即，替换表达式（例如 ${foo}）会被替换处理，但转义序列（例如 \n）不会被处理。
+
+```
+console.log(String.raw`Hi\n${2 + 3}!`, `Hi\n${2 + 3}!`)
+// Hi\n5
+// Hi
+// n5
+```
+
+## String.prototype.repeat()
+
+`repeat()` 方法构造并返回一个新字符串，其中包含指定数量的所调用的字符串副本，这些副本连接在一起。
+
+```
+const mood = 'Happy! ';
+
+console.log(`I feel ${mood.repeat(3)}`);
+// Expected output: "I feel Happy! Happy! Happy! "
+```
+
+## String.prototype.replace()
+
+`replace()` 方法返回一个新字符串，其中一个、多个或所有匹配的 pattern 被替换为 replacement。pattern 可以是字符串或 RegExp，replacement 可以是字符串或一个在每次匹配时调用的函数。如果 pattern 是字符串，则只会替换第一个匹配项。原始的字符串不会改变。
+
+replace(pattern, replacement)
+
+- pattern
+可以是字符串或者一个带有 Symbol.replace 方法的对象，典型的例子就是正则表达式。任何没有 Symbol.replace 方法的值都会被强制转换为字符串。
+
+- replacement
+  可以是字符串或函数。
+
+  - 如果是字符串，它将替换由 pattern 匹配的子字符串。支持一些特殊的替换模式，请参阅下面的指定字符串作为替换项部分。
+  - 如果是函数，将为每个匹配调用该函数，并将其返回值用作替换文本。下面的指定函数作为替换项部分描述了提供给此函数的参数。
+- 返回值
+一个新的字符串，其中一个、多个或所有的匹配项都被指定的替换项替换。

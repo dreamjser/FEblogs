@@ -12,6 +12,7 @@
 + [防抖、节流](./javascript/throttledebounce.md)
 + [web worker](./javascript/webworker.md)
 + [数组Array](./javascript/array.md)
++ [字符串String](./javascript/string.md)
 
 ## ES6
 + [Promise](./es6+/promise.md)

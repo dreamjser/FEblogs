@@ -274,3 +274,193 @@ replace(pattern, replacement)
   - 如果是函数，将为每个匹配调用该函数，并将其返回值用作替换文本。下面的指定函数作为替换项部分描述了提供给此函数的参数。
 - 返回值
 一个新的字符串，其中一个、多个或所有的匹配项都被指定的替换项替换。
+
+模式|插入值
+---|---
+$$ | 插入一个 "$"。
+$& | 插入匹配的子字符串。
+$` | 插入匹配子字符串之前的字符串片段。
+$' | 插入匹配子字符串之后的字符串片段。
+$n | 插入第 n（索引从 1 开始）个捕获组，其中 n 是小于 100 的正整数。
+$ | 插入名称为 Name 的命名捕获组。
+
+```
+function replacer(match, p1, p2, /* …, */ pN, offset, string, groups) {
+  return replacement;
+}
+```
+该函数的参数如下所示：
+
+- match
+匹配的子字符串。（对应于上面的 $&。）
+
+- p1, p2, …, pN
+如果 replace() 的第一个参数是 RegExp 对象，则为捕获组（包括命名捕获组）找到的第 n 个字符串。（对应于上面的 $1、$2 等。）例如，如果 pattern 是 /(\d+)(\w+)/，则 p1 是 \a+ 的匹配项，p2 是 \b+ 的匹配项。如果该组是分支的一部分（例如 "abc".replace(/(a)|(b)/, Replacer)），则不匹配的替代项将为 undefined。
+
+- offset
+原始字符串中匹配子字符串的偏移量。例如，如果整个字符串是 'abcd'，而匹配的子字符串是 'bc'，那么这个参数将是 1。
+
+- string
+正在检查的原始字符串。
+
+- groups
+一个捕获组命名组成的对象，值是匹配的部分（如果没有匹配，则为 undefined）。仅在 pattern 包含至少一个命名捕获组时才存在。
+
+参数的确切数量取决于第一个参数是否为 RegExp 对象，以及它有多少个捕获组。
+
+```
+'123ad'.replace(/(\d+)([a-z]+)/, '$1-$2')
+// '123-ad'
+```
+
+## string.prototype.replaceAll()
+
+`replaceAll()` 方法返回一个新字符串，其中所有匹配 pattern 的部分都被替换为 replacement。pattern 可以是一个字符串或一个 RegExp，replacement 可以是一个字符串或一个在每次匹配时调用的函数。原始字符串保持不变。
+
+- pattern
+  可以是一个字符串或一个具有 Symbol.replace 方法的对象，典型的例子是正则表达式。任何没有 Symbol.replace 方法的值都将被强制转换为字符串。
+
+  如果 pattern 是一个正则表达式，则必须设置全局（g）标志，否则会抛出 TypeError。
+
+- replacement
+ 可以是一个字符串或一个函数。替换字符串的语义与 String.prototype.replace() 相同。
+
+- 返回值
+  返回一个新字符串，其中所有匹配 pattern 的部分都被替换为 replacement。
+
+```
+"aabbcc".replaceAll(/b/g, ".");
+// "aa..cc"
+```
+
+## String.prototype.search()
+
+`search()` 方法用于在 String 对象中执行正则表达式的搜索，寻找匹配项。
+
+search(regexp)
+
+- regexp
+  一个正则表达式对象，或者具有 Symbol.search 方法的任意对象。
+
+  如果 regexp 不是 RegExp 对象，并且不具有 Symbol.search 方法，则会使用 new RegExp(regexp) 将其隐式转换为 RegExp。
+
+- 返回值
+  如果匹配成功，则返回正则表达式在字符串中首次匹配的索引；否则，返回 -1。
+
+```
+'123ad'.search(/[a-z]/)
+// 3
+```
+
+## String.prototype.slice()
+
+`slice()` 方法提取字符串的一部分，并将其作为新字符串返回，而不修改原始字符串。
+
+slice(indexStart, indexEnd?)
+
+- indexStart
+要返回的子字符串中包含的第一个字符的索引。
+
+- indexEnd 可选
+要返回的子字符串中排除的第一个字符的索引。
+
+```
+const str1 = "The morning is upon us."; // str1 的长度是 23。
+const str2 = str1.slice(1, 8);
+const str3 = str1.slice(4, -2);
+const str4 = str1.slice(12);
+const str5 = str1.slice(30);
+console.log(str2); // he morn
+console.log(str3); // morning is upon u
+console.log(str4); // is upon us.
+console.log(str5); // ""
+```
+
+## String.prototype.split()
+
+`split()` 方法接受一个模式，通过搜索模式将字符串分割成一个有序的子串列表，将这些子串放入一个数组，并返回该数组。
+
+split(separator, limit?)
+
+- separator
+描述每个分割应该发生在哪里的模式。可以是 undefined，一个字符串，或者一个具有 Symbol.split 方法的对象——典型的例子是正则表达式。省略 separator 或传递 undefined 会导致 split() 返回一个只包含所调用字符串数组。所有不是 undefined 的值或不具有 @@split 方法的对象都被强制转换为字符串。
+
+- limit 可选
+一个非负整数，指定数组中包含的子字符串的数量限制。当提供此参数时，split 方法会在指定 separator 每次出现时分割该字符串，但在已经有 limit 个元素时停止分割。任何剩余的文本都不会包含在数组中。
+
+如果在达到极限之前就达到了字符串的末端，那么数组包含的条目可能少于 limit。
+如果 limit 为 0，则返回 []。
+- 返回值
+在给定字符串中出现 separator 的每一个点上进行分割而成的字符串数组。
+
+```
+'a|b|c|d|e'.split(/\|/, 3)
+// ['a', 'b', 'c']
+```
+
+## String.prototype.startsWith()
+
+String 的 `startsWith()` 方法用来判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false。
+
+startsWith(searchString, position?)
+
+- searchString
+要在该字符串开头搜索的子串。不能是正则表达式。所有不是正则表达式的值都会被强制转换为字符串，因此省略它或传递 undefined 将导致 startsWith() 搜索字符串 "undefined"，这应该不是你想要的结果。
+
+- position 可选
+searchString 期望被找到的起始位置（即 searchString 的第一个字符的索引）。默认为 0。
+
+- 返回值
+如果给定的字符在字符串的开头被找到（包括当 searchString 是空字符串时），则返回 true；否则返回 false。
+
+
+```
+const str1 = 'Saturday night plans';
+
+console.log(str1.startsWith('Sat'));
+// Expected output: true
+
+console.log(str1.startsWith('Sat', 3));
+// Expected output: false
+```
+
+## String.prototype.substring()
+
+String 的 `substring()` 方法返回该字符串从起始索引到结束索引（不包括）的部分，如果未提供结束索引，则返回到字符串末尾的部分。
+
+substring(indexStart, indexEnd?)
+
+- indexStart
+返回子字符串中第一个要包含的字符的索引。
+
+- indexEnd 可选
+返回子字符串中第一个要排除的字符的索引。
+
+
+```
+const anyString = "Mozilla";
+
+console.log(anyString.substring(0, 1)); // 'M'
+console.log(anyString.substring(1, 0)); // 'M'
+```
+
+## String.prototype.toLowerCase()
+
+String 的 `toLowerCase()` 方法将该字符串转换为小写形式。
+
+
+## String.prototype.toUpperCase()
+
+String 的 `toUpperCase()` 方法将该字符串转换为大写形式。
+
+## String.prototype.trim()
+
+String 的 `trim()` 方法会从字符串的两端移除空白字符，并返回一个新的字符串，而不会修改原始字符串。
+
+## String.prototype.trimEnd()
+
+String 的 `trimEnd()` 方法会从字符串的结尾移除空白字符，并返回一个新的字符串，而不会修改原始字符串。`trimRight()` 是该方法的别名。
+
+## String.prototype.trimStart()
+
+String 的 `trimStart()` 方法会从字符串的开头移除空白字符，并返回一个新的字符串，而不会修改原始字符串。`trimLeft()` 是该方法的别名

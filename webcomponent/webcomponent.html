@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      --my-component-color: blue !important;
+    }
+    p{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <hello-world words="你好世界！">
+    <div slot="prefix">6766</div>
+  </hello-world>
+  <template id="hello_world">
+    <style>
+      /* :host {
+        --my-component-color: green;
+      } */
+      :host{
+        color:var(--my-component-color);
+      }
+      .words{
+        color: red;
+      }
+    </style>
+    <slot name="prefix"></slot>
+    组件内容：<p class="words"></p>
+  </template>
+  <script>
+    class HelloWorld extends HTMLElement {
+      constructor() {
+        super();
+        const content = document.getElementById('hello_world').content
+        this.attachShadow({mode: 'open'});
+        this.shadowRoot.appendChild(document.importNode(content, true));
+        this.setText(this.getAttribute('words'))
+      }
+
+      setText(val) {
+        this.shadowRoot.querySelector('.words').textContent = val
+      }
+
+      attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'words') {
+          this.shadowRoot.querySelector('.words').textContent = newValue;
+        }
+      }
+    }
+
+    customElements.define('hello-world', HelloWorld);
+
+
+    window.addEventListener('click', () => {
+      HelloWorld.changeText()
+    })
+  </script>
+</body>
+</html>
